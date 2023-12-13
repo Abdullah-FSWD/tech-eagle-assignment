@@ -1,4 +1,4 @@
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import ProductPage from "./pages/ProductPage";
 import Navbar from "react-bootstrap/Navbar";
@@ -13,7 +13,7 @@ function App() {
       <div className="d-flex flex-column site-container">
         <header>
           <Navbar bg="dark" variant="dark">
-            <Container>
+          <Container className="mt-3">
               <LinkContainer to="/">
                 <Navbar.Brand>Tech Eagle</Navbar.Brand>
               </LinkContainer>

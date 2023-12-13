@@ -1,10 +1,11 @@
 import axios from "axios";
-// import data from "../data";
-
-import { useEffect, useReducer, useState } from "react";
+import { useEffect, useReducer } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Product from "../component/Product";
+import LoadingBox from "../component/LoadingBox";
+import MessageBox from "../component/MessageBox";
+import { Helmet } from "react-helmet-async";
 const reducer = (state, action) => {
   switch (action.type) {
     case "FETCH_REQUEST":
@@ -23,7 +24,6 @@ const HomePage = () => {
     error: "",
     products: [],
   });
-  // const [products, setProducts] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,20 +34,21 @@ const HomePage = () => {
       } catch (err) {
         dispatch({ type: "FETCH_FAIL", payload: err.message });
       }
-
-      // setProducts(result.data);
     };
     fetchData();
   }, []);
 
   return (
     <div>
+      <Helmet>
+        <title>Tech Eagle</title>
+      </Helmet>
       <h1>Featured Products</h1>
       <div className="products">
         {loading ? (
-          <div>Loading...</div>
+          <LoadingBox />
         ) : error ? (
-          <div>{error}</div>
+          <MessageBox variant="danger">{error}</MessageBox>
         ) : (
           <Row>
             {products.map((product) => (
@@ -56,10 +57,9 @@ const HomePage = () => {
               </Col>
             ))}
           </Row>
-        )}{" "}
+        )}
       </div>
     </div>
   );
 };
-
 export default HomePage;
