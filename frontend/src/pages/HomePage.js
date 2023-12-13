@@ -6,6 +6,8 @@ import Product from "../component/Product";
 import LoadingBox from "../component/LoadingBox";
 import MessageBox from "../component/MessageBox";
 import { Helmet } from "react-helmet-async";
+import data from "../data";
+
 const reducer = (state, action) => {
   switch (action.type) {
     case "FETCH_REQUEST":
@@ -29,8 +31,9 @@ const HomePage = () => {
     const fetchData = async () => {
       dispatch({ type: "FETCH_REQUEST" });
       try {
-        const result = await axios.get("/api/products");
-        dispatch({ type: "FETCH_SUCCESS", payload: result.data });
+        // const result = await axios.get("/api/products");
+        const result = await data;
+        dispatch({ type: "FETCH_SUCCESS", payload: data.products });
       } catch (err) {
         dispatch({ type: "FETCH_FAIL", payload: err.message });
       }
@@ -51,7 +54,7 @@ const HomePage = () => {
           <MessageBox variant="danger">{error}</MessageBox>
         ) : (
           <Row>
-            {products.map((product) => (
+            {data.products.map((product) => (
               <Col key={product.slug} sm={6} md={4} lg={3} className="mb-3">
                 <Product product={product}></Product>
               </Col>
