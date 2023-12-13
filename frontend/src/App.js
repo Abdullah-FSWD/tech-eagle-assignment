@@ -29,6 +29,7 @@ function App() {
                   {cart.cartItems.length > 0 && (
                     <Badge pill bg="danger">
                       {cart.cartItems.length}
+                      {/* {cart.cartItems.reduce((a,c) => a + c.quantity), 0} --> to see the product quantity in nav cart using reduce function with accumulator */}
                     </Badge>
                   )}
                 </Link>
